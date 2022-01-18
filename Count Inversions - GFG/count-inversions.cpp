@@ -36,7 +36,7 @@ class Solution{
             }
             else
             {
-                invcnt+=(mid-i-l+1);
+                invcnt+=(n-i);
                 arr[p++]=rht[j++];
             }
         }
