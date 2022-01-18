@@ -9,7 +9,7 @@ class Solution{
     // arr[]: Input Array
     // N : Size of the Array arr[]
     // Function to count inversions in the array.
-     #define ll long long 
+    #define ll long long 
     
     ll merge(ll arr[],ll l, ll mid, ll r)
     {
@@ -32,23 +32,31 @@ class Solution{
         {
             if(lft[i]<=rht[j])
             {
-                arr[p++]=lft[i++];
+                arr[p]=lft[i];
+                i++;
+                p++;
             }
             else
             {
                 invcnt+=(n-i);
-                arr[p++]=rht[j++];
+                arr[p]=rht[j];
+                j++;
+                p++;
             }
         }
         
         while(i<n)
         {
-            arr[p++]=lft[i++];
+            arr[p]=lft[i];
+            i++;
+            p++;
         }
         
         while(j<m)
         {
-            arr[p++]=rht[j++];
+            arr[p]=rht[j];
+            j++;
+            p++;
         }
         
         
@@ -62,7 +70,7 @@ class Solution{
         
         if(l<r)
         {
-           mid= l+(r-l) /2;
+           mid=(l+r)/2;
             
             invcnt+=mergesort(arr,l,mid);
             invcnt+=mergesort(arr,mid+1,r);
@@ -72,6 +80,7 @@ class Solution{
         
         return invcnt;
     }
+    
     long long int inversionCount(long long arr[], long long N)
     {
         // Your Code Here
