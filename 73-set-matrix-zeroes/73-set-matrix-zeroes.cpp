@@ -11,14 +11,14 @@ public:
         bool hasZeroFirstRow = false;
         bool hasZeroFirstCol = false;
         
-        /// Does first Row have ZERO element ?
+        /// check kar raha ki does first row have ZERO element ?
         for(int j=0;j<colnum;j++){
             if(matrix[0][j] == 0){
                 hasZeroFirstRow = true;
                 break;
             }
         }
-        /// Does first Col have ZERO element ?
+        /// then check kr rha ki does first Col have ZERO element ?
         for(int j=0;j<rownum;j++){
             if(matrix[j][0] == 0){
                 hasZeroFirstCol = true;
@@ -26,13 +26,13 @@ public:
             }
         }
         
-        /// make use of first rown and col
+        ///  use  krenge first row and col ko
         /// find zero and store info in first row and col
         for(int i=1;i<rownum;i++){
             for(int j=1;j<colnum;j++){
                 if(matrix[i][j] == 0){
-                    matrix[i][0] = 0;
-                    matrix[0][j] = 0;
+                    matrix[i][0] = 0; // top most ko 0 kiya
+                    matrix[0][j] = 0; // leftmost most ko 0 kiya
                 }
             }
         }
@@ -40,7 +40,7 @@ public:
         for(int i=1;i<rownum;i++){
             for(int j=1;j<colnum;j++){
                 if(matrix[0][j]==0 || matrix[i][0]==0){
-                    matrix[i][j] = 0;
+                    matrix[i][j] = 0;  //check kiya ki if top most 0 hai ya leftmost 0 hai then element 0 kiya
                 }
             }
         }
