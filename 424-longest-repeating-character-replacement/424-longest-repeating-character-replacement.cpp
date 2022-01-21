@@ -1,29 +1,28 @@
 class Solution {
 public:
     int characterReplacement(string s, int k) {
-    vector<int> freq(26, 0); //keeps frequency of character of the window
-
-	int l = 0;
-	int maxLength = 0, maxFreq = 0;
-
-	for (int r = 0; r < s.size(); ++r){
-		freq[s[r]-'A']++;
-		maxFreq = max (maxFreq, freq[s[r]-'A']);
-
-		int windowSize = r - l + 1;
-
-		if (windowSize - maxFreq > k){
-			//character replacement not affordable
-			freq[s[l]-'A']--;
-			l++;
-		}else{
-			maxLength = max(maxLength, windowSize);
-		}
-	}
-
-	return maxLength;
         
-          
+        
+        unordered_map<char,int> mp;
+        int start = 0;
+        int end =0;
+        int maxCharCount = 0;
+        int n = s.length();
+        int result = 0;
+        while(end<n){
+            
+            char initialch = s[end];
+            mp[initialch]++;
+            maxCharCount = max(maxCharCount, mp[initialch]);
+            end++;
+            while(end-start-maxCharCount > k) {
+                char startch = s[start];
+                mp[startch]--;
+                start++;
+            }
+            result = max(result, end-start);
+        }
+        return result;
         
     }
 };
