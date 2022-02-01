@@ -12,6 +12,7 @@ class Solution
         // Your code here
         
         vector <long long> v(n);
+        
         stack <long long> s;
         for(int i=n-1; i>=0; i--){
             
