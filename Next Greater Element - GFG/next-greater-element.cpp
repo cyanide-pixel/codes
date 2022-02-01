@@ -14,8 +14,11 @@ class Solution
         vector <long long> v(n);
         stack <long long> s;
         for(int i=n-1; i>=0; i--){
-            while(!s.empty() && s.top()<arr[i])
+            
+           
+            while(!s.empty() and s.top()<arr[i])
                 s.pop();
+        
             v[i] = s.empty() ? -1 : s.top();
             s.push(arr[i]);
         }
