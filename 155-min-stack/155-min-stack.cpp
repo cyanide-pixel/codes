@@ -5,10 +5,7 @@ private:
     int min = INT_MAX;
     
 public:
-    
-    MinStack() {
-        
-    }
+
     
     void push(int val) {
         
