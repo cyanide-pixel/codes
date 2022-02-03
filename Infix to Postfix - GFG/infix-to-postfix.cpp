@@ -43,9 +43,9 @@ class Solution
                 }
                 else
                 {
-                    while(!st.empty() and priority(c)<=priority(st.top()))
+                    while(!st.empty() and priority(c)<=priority(st.top())) // stk   +
                     {
-                        ans+=st.top();
+                        ans+=st.top(); 
                         st.pop();
                     }
                     st.push(c);
