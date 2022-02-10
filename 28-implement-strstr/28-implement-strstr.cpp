@@ -1,32 +1,43 @@
 class Solution {
+    #define ll long long int
+    #define mm 1000000007
 public:
-    int strStr(string haystack, string needle) {
+    int strStr(string s, string x) {
         
-       
-        auto n = haystack.length(); auto m = needle.length();
-        if (m == 0) return 0;
-        if (n == 0 || n < m) return -1;
-                                            
-        int d = 31;                                   
-        int q = 15486703;                        
-        long p = 0; long t = 0; long h = 1;
-       
-        for (auto i = 0; i < m; ++i) {          
-            if (i != m - 1) 
-                h = (d * h) % q;
-            p = (d * p + needle[i]) % q;
-            t = (d * t + haystack[i]) % q;
+        ll n=s.size(),z=0,m=x.size(),i;
+        if(m==0)
+            return 0;
+        if(m>n)
+            return -1;
+        vector<ll>h(n,0),p(n,0);
+        p[0]=1;
+        for(i=1;i<n;i++)
+            p[i]=(p[i-1]*31)%mm;
+        h[0]=s[0]-'a'+1;
+        for(i=1;i<n;i++){
+            h[i]=(h[i-1]+((s[i]-'a'+1)*1ll*p[i])%mm)%mm;
+                                                                    
+            
         }
-        
-        for (auto s = 0; s < n - m + 1; ++s) {
-            if (t < 0) t += q;                          
-            if (p == t)                                 
-                if (needle == haystack.substr(s, m))   
-                    return s;
-            if (s < n - m)                     
-                t = (d * (t - haystack[s] * h) + haystack[s+m]) % q;
+        for(i=0;i<m;i++)
+        {
+            z=(z+(x[i]-'a'+1)*1ll*p[i])%mm;
         }
-        
-        return -1;   
+        cout<<z<<endl;
+        for(i=0;i<n;i++)
+            cout<<h[i]<<" ";
+        cout<<endl;
+        if(h[m-1]==z)
+            return 0;
+        for(i=1;i<=n-m;i++)
+        {
+            ll d=(h[i+m-1]-h[i-1]+mm)%mm;
+            
+            ll rr=(z*1ll*p[i])%mm;
+            
+            if(d==rr)
+                return i;
+        }
+        return -1;
     }
 };
