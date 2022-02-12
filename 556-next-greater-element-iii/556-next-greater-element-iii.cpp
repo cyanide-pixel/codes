@@ -1,28 +1,33 @@
 class Solution {
 public:
     int nextGreaterElement(int n) {
-      string s = to_string(n);
-      int sz = s.size();
-      int i;
-      bool ok = false;
-      for(i = sz - 2; i >= 0; i--){
-         if(s[i] < s[i + 1]) {
-            ok = true;
-            break;
-         }
-      }
-      if(!ok) return -1;
-      int smallest = i;
-      int curr = i + 1;
-      for(int j = i + 1; j < sz; j++){
-         if(s[j] > s[smallest] && s[j] <= s[curr]){
-            curr = j;
-         }
-      }
-      swap(s[smallest], s[curr]);
-      string aux = s.substr(smallest + 1);
-      reverse(aux.begin(), aux.end());
-      string ret = s.substr(0, smallest + 1) + aux;
-      return stol(ret) > INT_MAX ? -1 : stol(ret);
+        
+        string s = to_string(n);
+        
+        int i=0;
+        for(i=s.size()-1; i>0; i--){
+            if(s[i]>s[i-1]){
+                break;
+            }
+        }
+        if(i==0){ return -1;} 
+        
+        
+        int x=s[i-1], small=i;
+        for(int j=i+1; j<s.size(); j++){
+            if((s[j]>x)&&(s[j]<=s[small])){
+                small=j;
+            }
+        }
+       
+       swap(s[i-1],s[small]);
+
+        sort(s.begin() + i, s.end());
+        cout<<s;
+        
+        long res = stol(s);
+        
+        if((res>INT_MAX) || (res<n)) return -1;
+        else return res;
     }
 };
