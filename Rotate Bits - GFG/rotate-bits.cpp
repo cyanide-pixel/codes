@@ -9,12 +9,12 @@ class Solution
         vector <int> rotate (int n, int d)
         {
             //code here.
-            int INT_BITS = 16;
+            
             if(d > 16)
                 d = d%16;
             int a ,b ;
-            a = (n << d) | (n >> (INT_BITS - d));
-            b = (n >> d) | (n << (INT_BITS - d));
+            a = (n << d) | (n >> (16 - d));
+            b = (n >> d) | (n << (16 - d));
             
             a = (a & ((1 << 16)-1));
             b = (b & ((1 << 16)-1));
