@@ -6,7 +6,7 @@ using namespace std;
  // } Driver Code Ends
 //Function to determine if graph can be coloured with at most M colours such
 //that no two adjacent vertices of graph are coloured with same colour.
-bool isSafe(bool graph[101][101], int color,int r,std::vector<int> & colors){
+bool isSafe(bool graph[101][101], int color,int r,vector<int> & colors){
     for(int j=0;j<101;j++){
         if(graph[r][j]==1){
             if(colors[j]==color){
@@ -17,7 +17,7 @@ bool isSafe(bool graph[101][101], int color,int r,std::vector<int> & colors){
     return true;
 }
 
-bool solve(bool graph[101][101],std::vector<int> & colors,int i,int m){
+bool solve(bool graph[101][101],vector<int> & colors,int i,int m){
     if(i >= colors.size()){
         return true;
     }
@@ -35,7 +35,7 @@ bool solve(bool graph[101][101],std::vector<int> & colors,int i,int m){
 bool graphColoring(bool graph[101][101], int m, int V)
 {
     // your code here
-    std::vector<int> colors(V,-1);
+    vector<int> colors(V,-1);
     bool res =solve(graph,colors,0,m);
     return res;
 }
