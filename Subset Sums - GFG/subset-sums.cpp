@@ -5,19 +5,24 @@ using namespace std;
  // } Driver Code Ends
 class Solution
 {
-public:
-    void recursion(vector<int>&arr,int start,vector<int>&ans,int sum){
-        for(int i =start ; i< arr.size();i++){
-            ans.push_back(sum+arr[i]);
-            recursion(arr,i+1,ans,sum+arr[i]);
+private:
+    void solve(int i,vector<int>&arr,int n,int sum,vector<int>&ans)
+    {
+        if(i==n)
+        {
+            ans.push_back(sum);
+            return;
         }
+        solve(i+1,arr,n,sum,ans);
+        solve(i+1,arr,n,(sum+arr[i]),ans);
+        return;
     }
+public:
     vector<int> subsetSums(vector<int> arr, int N)
     {
         // Write Your Code here
-        vector<int> ans;
-        ans.push_back(0);
-        recursion(arr,0,ans,0);
+        vector <int> ans;
+        solve(0 , arr , N , 0 , ans);
         return ans;
     }
 };
