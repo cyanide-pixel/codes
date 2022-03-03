@@ -10,44 +10,23 @@
  */
 class Solution {
 public:
-      
-    ListNode* reverse(ListNode* head){
-        ListNode* prev=NULL,*curr=head,*fur=head;
-        while(fur!=NULL){
-            fur=fur->next;
-            curr->next=prev;
-            prev=curr;
-            curr=fur;
-        }
-        return prev;
-    }
-    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        ListNode* a=reverse(l1),*b=reverse(l2);
-        int currsum=a->val + b->val;
-        int currnodeval=currsum%10;
-        int carry=currsum/10;
-        ListNode* ans=new ListNode(currnodeval);
-        ListNode* curr=ans;
-        a=a->next;
-        b=b->next;
-        while(a or b or carry){
-            currsum=0;
-            if(a){
-                currsum+=a->val;
-                a=a->next;
-            }
-            if(b){
-                currsum+=b->val;
-                b=b->next;
-            }
-            if(carry)currsum+=carry;
-            carry=currsum/10;
-            ListNode *newNode = new ListNode(currsum%10);
-            curr->next = newNode;
-            curr = newNode;
-            }
-        ListNode* res=reverse(ans);
-        return res;
+    ListNode* addTwoNumbers(ListNode* list1, ListNode* list2) {
         
+        stack<int> stack1, stack2;
+        while(list1){stack1.push(list1->val); list1 = list1->next;}
+        while(list2){stack2.push(list2->val); list2 = list2->next;}
+        int sum = 0;
+        ListNode* currNode = nullptr;
+        while(stack1.size() or stack2.size()){
+            int val1 = stack1.size() ? stack1.top() : 0;
+            int val2 = stack2.size() ? stack2.top() : 0;
+            if(stack1.size()) stack1.pop();
+            if(stack2.size()) stack2.pop();
+            sum = val1 + val2 + sum;
+            currNode = new ListNode(sum%10, currNode);
+            sum /= 10;
+        }
+        if(sum){currNode = new ListNode(sum, currNode);}
+        return currNode;
     }
 };
