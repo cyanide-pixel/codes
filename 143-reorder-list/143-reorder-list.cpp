@@ -12,37 +12,21 @@ class Solution {
 public:
     void reorderList(ListNode* head) {
         
-        if (!head) return;
+            
+        if(!head || !head->next || !head->next->next) return;
         
-
-        ListNode *tmp = head, *half = head, *prev = NULL;
-        while (tmp->next && tmp->next->next) {
-            tmp = tmp->next->next;
-            half = half->next;
-        }
+        //Find the penultimate node i.e second last node of the linkedlist
+        ListNode* Ls = head;
+        while (Ls->next->next) Ls = Ls->next;
         
-
-        if (tmp->next) half = half->next;
+        // Link the penultimate with the second element
+        Ls->next->next = head->next;
+        head->next = Ls->next;
         
-
-        while (half) {
-            tmp = half->next;
-            half->next = prev;
-            prev = half;
-            half = tmp;
-        }
-        half = prev;
+        //Again set the penultimate to the the last 
+        Ls->next = NULL;
         
- 
-        while (head && half) {
-            tmp = head->next;
-            prev = half->next;
-            head->next = half;
-            half->next = tmp;
-            head = tmp;
-            half = prev;
-        }
-        
-        if (head && head->next) head->next->next = NULL;
+        // Do the above steps rcursive
+        reorderList(head->next->next);
     }
 };
