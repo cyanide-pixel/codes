@@ -11,27 +11,32 @@
  */
 class Solution {
 public:
-    int dfs(TreeNode* root,int x,int y,bool &ans){
-        if(!root) return 0;
-        else if(root->val == x or root->val == y) return 1;
-        
-        int lc = dfs(root->left,x,y,ans);
-        int rc = dfs(root->right,x,y,ans);
-        
-        if(lc and rc){
-            if(lc == 1 and rc == 1) ans = false;
-            else if(lc == rc) ans = true;
-            return lc+1;
-        }
-        if(lc) return lc+1;
-        if(rc) return rc+1;
-        
-		return 0;
-    }
+    unordered_map<int, int> m;
+    bool siblings = true;
     bool isCousins(TreeNode* root, int x, int y) {
-        bool ans = false;
-        dfs(root,x,y,ans);
-        return ans;
-        
+        dfs(root, 0, x, y);
+        return m[x] == m[y] && siblings;
     }
+    void dfs(TreeNode* v, int level, int x, int y) {
+        if (!v) {
+            return;
+        }
+        if (v->left && v->right) {
+            if (v->left->val == x && v->right->val == y || 
+                v->left->val == y && v->right->val == x) {
+            siblings = false;
+            return;
+            }
+        }
+        if (v->val == x || v->val == y) {
+            m[v->val] = level;
+        }
+        if (v->left) {
+            dfs(v->left, level + 1, x, y);
+        }
+        if (v->right) {
+            dfs(v->right, level+1, x, y); 
+        }
+    }        
+        
 };
