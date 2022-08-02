@@ -9,7 +9,7 @@ public:
 		
 			priority_queue<pair<int, char>> max_heap;
 			for (int i = 0; i < 26; i++) {
-				if (chrCounts[i]) {max_heap.push({chrCounts[i], 97+i});}
+				if (chrCounts[i]) {max_heap.push({chrCounts[i], 'a'+i});}
 			}
 
 			int i = 0;
