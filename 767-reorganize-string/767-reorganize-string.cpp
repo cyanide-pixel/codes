@@ -4,7 +4,7 @@ public:
         
 			vector<int> chrCounts(26);
 			for (auto& chr: s) 
-                if(++chrCounts[chr-97] > (s.size()+1)/2) return "";
+                if(++chrCounts[chr-'a'] > (s.size()+1)/2) return "";
 		
 		
 			priority_queue<pair<int, char>> max_heap;
