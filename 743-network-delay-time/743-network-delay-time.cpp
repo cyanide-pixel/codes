@@ -1,46 +1,41 @@
 class Solution {
 public:
     int networkDelayTime(vector<vector<int>>& times, int n, int k) {
-         vector<int>dis(n+1,INT_MAX);
-         priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
+        vector<int> dist(n+1, INT_MAX);
+        vector<vector<int>> adj[n+1];
         
-        vector<vector<int>>adj[n+1];
+        priority_queue<pair<int,int>, vector<pair<int, int>>, greater<pair<int,int>>> pq;
         
-        for(int j=0;j<times.size();j++)   
-            {
-                int u=times[j][0];
-                int v=times[j][1];
-                int w=times[j][2];
-                adj[u].push_back({v,w});
-          }
-         
-         dis[k]=0;                         
-         pq.push({0,k});
+        for(int i=0; i<times.size(); i++) {
+            int u = times[i][0];
+            int v = times[i][1];
+            int w = times[i][2];
+            adj[u].push_back({v,w});
+        }
+        dist[k] = 0;
+        pq.push({0, k});
         
-         while(!pq.empty())
-         {
-              int u=pq.top().second;
-              pq.pop();
-             
-             for(auto vec:adj[u])      
-                {
-                    int v=vec[0];
-                    int w=vec[1];
-                 
-                   if(dis[u]+w<dis[v])
-                      {
-                        pq.push({dis[u]+w,v});
-                        dis[v]=w+dis[u];
-                      }
+        while(!pq.empty()) {
+            int u = pq.top().second;
+            pq.pop();
+            
+            for(auto vc:adj[u]) {
+                int v = vc[0];
+                int w = vc[1];
+                
+                if(dist[u]+w<dist[v]) {
+                    pq.push({dist[u]+w, v});
+                    dist[v] = dist[u]+w;
                 }
-          }
-	   
-        int ans=0;
-        for(int i=1;i<=n;i++)
-            {
-              if(dis[i]==INT_MAX) return -1;
-              ans=max(ans,dis[i]);
-          }
+            }
+        }
+        
+        int ans = 0;
+        for(int i=1; i<n+1; i++) {
+            ans = max(dist[i], ans);
+        }
+        if(ans == INT_MAX) return -1;
+        
         return ans;
-     }
+    }
 };
