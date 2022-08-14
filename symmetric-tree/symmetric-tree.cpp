@@ -11,17 +11,18 @@
  */
 class Solution {
 public:
-   
     bool isSymmetric(TreeNode* root) {
-        if(root==NULL)
+        if(root == NULL) {
             return true;
-        return mirrorTree(root->left,root->right);
-    }
-
-    bool mirrorTree(TreeNode* p,TreeNode* q){
-        if(p==NULL || q==NULL){
-            return p==q;
         }
-        return p->val==q->val && mirrorTree(p->left,q->right) && mirrorTree(p->right,q->left);
+        return isMirror(root->left, root->right);
+    }
+    
+    bool isMirror(TreeNode* p, TreeNode* q) {
+        if(p == NULL || q == NULL) {
+            return p == q;
+        }
+        
+        return p->val == q->val && isMirror(p->left , q->right) && isMirror(p->right, q->left);
     }
 };
