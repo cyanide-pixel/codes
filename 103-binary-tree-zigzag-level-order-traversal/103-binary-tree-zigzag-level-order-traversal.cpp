@@ -27,9 +27,9 @@ public:
             
             for(int i=0; i<sz; i++) {
                 TreeNode* f = q.front();
-                q.pop();               
+                q.pop();
                 
-                int idx = (ltr) ? i : (sz-1-i);
+                int idx = (ltr) ? i :  (sz-1-i);
                 row[idx] = f->val;
                 
                 if(f->left) q.push(f->left);
