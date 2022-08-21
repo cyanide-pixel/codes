@@ -17,9 +17,7 @@ public:
             {
                 tot_sum+=m->importance;
                 for(auto k:m->subordinates) 
-                {
                     tot_sum+= dfs(emp, k, vis);
-                }
             }
         }
         return tot_sum;
