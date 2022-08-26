@@ -11,22 +11,26 @@
  */
 class Solution {
 public:
-    void dfs(TreeNode* root, int low, int high, int &res) {
-        if(root != NULL) {
-            if(root->val>=low && root->val<=high) {
-                res+=root->val;
-            }
-            if(root->val>low) {
-                dfs(root->left, low, high, res);
-            }
-            if(root->val<high) {
-                dfs(root->right, low, high, res);
+    int rangeSumBST(TreeNode* root, int low, int high) {
+        stack<TreeNode*> st;
+        int ans = 0;
+        st.push(root);
+        
+        while(!st.empty()){
+            TreeNode* f = st.top();
+            st.pop();
+            if(f != NULL) {
+                    if(f->val>=low && f->val<=high) {
+                        ans+=f->val;
+                    }
+                    if(f->val>low) {
+                        st.push(f->left);
+                    }
+                    if(f->val<high) {
+                        st.push(f->right);
+                    }  
             }
         }
-    }
-    int rangeSumBST(TreeNode* root, int low, int high) {
-        int res = 0;
-        dfs(root, low, high, res);
-        return res;
+        return ans;
     }
 };
